@@ -1,34 +1,37 @@
 // Official Modules
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import YTSearch from 'youtube-api-search'
 // User Modules
 import SearchBar from './components/search_bar';
+import VideoList from './components/video_list';
 
 
 // API_KEY for Google API
 const API_KEY = "AIzaSyDwHbIP5KGEY3wzJpYbKy3OiLxsfdOEgug";
 
-YTSearch({key: API_KEY, term: 'surfboards'},function(data){
-    console.log(data);
-})
-
 // To install 'youtube search API' =>$npm install --save youtube-api-search
 
+class App extends Component {
+    constructor(props){
+        super(props);
 
-// Create a new component. This component should produce some HTML.
-const App = () => {
-    return (
-        <div>
-            <SearchBar />
-        </div>
-    );
+        this.state = { videos: []};
+
+        // Search function from Youtube API
+        YTSearch({key: API_KEY, term: 'surfboards'}, (videos) => {
+            this.setState({ videos }); // equal to this.setState({videos:videos});
+        });
+    }
+    render() {
+        return (
+            <div>
+                <SearchBar />
+                <VideoList videos={this.state.videos} />
+            </div>
+        );
+    }
 }
-/*ES5 Syntax
-const App = function(){
-    return <div>Hi!</div>;
-}
-*/
 
 // Take this component's generated HTML and put it on the page (in the DOM)
 ReactDOM.render(<App />,document.querySelector('.container')); // <App /> is React.createElement(App, null);
