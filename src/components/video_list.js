@@ -6,7 +6,13 @@ const VideoList = (props) => {
         // Need to provide key for each elements in the list 
         // so React don't need to update the entire list when something have changed
         // An 'etag' is a property in video Object gathered from youtube.
-        return <VideoListItem key={video.etag} video={video} />
+        return (
+            <VideoListItem 
+                onVideoSelect={props.onVideoSelect}
+                key={video.etag} 
+                video={video}
+            />
+        )
     });
 
     return (
