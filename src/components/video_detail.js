@@ -1,6 +1,10 @@
 import React from 'react';
 
-const VideoDetail = (props) => {
+const VideoDetail = ({video}) => {
+    // If the video have not loaded done yet. Show the 'Loading' text.
+    if (!video) {
+        return <div>Loading...</div>;
+    }
     const videoId = video.id.videoId;
     const url = `https://www.youtube.com/embed/${videoId}`; // "https://www.youtube.com/embed/" + videoId
 

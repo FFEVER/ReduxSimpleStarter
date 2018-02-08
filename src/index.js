@@ -5,6 +5,7 @@ import YTSearch from 'youtube-api-search'
 // User Modules
 import SearchBar from './components/search_bar';
 import VideoList from './components/video_list';
+import VideoDetail from './components/video_detail';
 
 
 // API_KEY for Google API
@@ -20,13 +21,14 @@ class App extends Component {
 
         // Search function from Youtube API
         YTSearch({key: API_KEY, term: 'surfboards'}, (videos) => {
-            this.setState({ videos }); // equal to this.setState({videos:videos});
+            this.setState({ videos }); // equals to this.setState({videos:videos});
         });
     }
     render() {
         return (
             <div>
                 <SearchBar />
+                <VideoDetail video={this.state.videos[0]} />
                 <VideoList videos={this.state.videos} />
             </div>
         );
