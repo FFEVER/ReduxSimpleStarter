@@ -5,8 +5,14 @@ class SearchBar extends Component {
     constructor(props){
         super(props);
 
-        this.state = { term: 'Type me!' };
+        this.state = { term: '' };
     }
+
+    onInputChange(term){
+        this.setState({term})
+        this.props.onSearchTermChange(term)
+    }
+
     // We need render() for returning JSX otherwise we'll get an error.
     render() {
         // Every time you change the state, use 'this.setState()'
@@ -14,10 +20,12 @@ class SearchBar extends Component {
             <div className="search-bar">
                 <input 
                 value = {this.state.term}
-                onChange={(event) => this.setState({ term: event.target.value})} />
+                onChange={(event) => this.onInputChange(event.target.value)} />
             </div>
         );
     }
+
+    
 }
 
 
